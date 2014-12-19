@@ -1,0 +1,6 @@
+<?jelly escape-by-default='true'?>
+<div>
+  This plugin allows users to provide an alternate phrase to "Build Now"
+  to build a job. Sometimes is more intuitive for users to call "Deploy now"
+  instead of "Build Now" to execute a job.
+</div>
