@@ -9,20 +9,23 @@ import org.kohsuke.stapler.StaplerRequest;
 import java.util.logging.Logger;
 
 /**
- * Allow jobs to provide alternate text to "Build Now"
+ * Allow jobs to provide alternate label to "Build Now"
  * Created by Udaypal Aarkoti (uaarkoti@gmail.com) on 12/19/14.
  */
 public class BuildNowTextProperty extends JobProperty<AbstractProject<?, ?>> {
     public final String alternateBuildNow;
 
     @DataBoundConstructor
-    public BuildNowTextProperty(String alternateBuildNow) {
+    public BuildNowTextProperty(boolean specified, String alternateBuildNow) {
+        if (!specified) alternateBuildNow = null;
         this.alternateBuildNow = alternateBuildNow;
     }
 
     public String getAlternateBuildNow() {
         return alternateBuildNow;
     }
+
+    public boolean isSpecified() { return alternateBuildNow!=null; }
 
     @Extension
     public static final class DescriptorImpl extends JobPropertyDescriptor {

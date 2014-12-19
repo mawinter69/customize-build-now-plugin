@@ -1,5 +1,9 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-    <f:entry title="${%alternate.buildnow}" field="alternateBuildNow">
-        <f:textbox default="${%Build Now}" />
-    </f:entry>
+    <f:block>
+        <f:optionalBlock title="${%alternate.buildnow}" field="specified" inline="true">
+            <f:entry title="${%New Label}" field="alternateBuildNow">
+                <f:textbox/>
+            </f:entry>
+        </f:optionalBlock>
+    </f:block>
 </j:jelly>

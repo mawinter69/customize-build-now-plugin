@@ -6,7 +6,7 @@ import hudson.model.AbstractProject;
 import hudson.util.AlternativeUiTextProvider;
 
 /**
- * This plugin allows users to provide an alternate phrase to "Build Now"
+ * This plugin allows users to provide an alternate label to "Build Now"
  * to build a job. Sometimes is more intuitive to users to say "Deploy now"
  * instead of "Build Now"
  *
