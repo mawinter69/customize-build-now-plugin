@@ -2,17 +2,13 @@ package org.jenkinsci.plugins.customizebuildnow;
 
 import hudson.Extension;
 import hudson.model.*;
-import net.sf.json.JSONObject;
+import jenkins.model.ParameterizedJobMixIn;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.StaplerRequest;
-
-import java.util.logging.Logger;
 
 /**
  * Allow jobs to provide alternate label to "Build Now"
- * Created by Udaypal Aarkoti (uaarkoti@gmail.com) on 12/19/14.
  */
-public class BuildNowTextProperty extends JobProperty<AbstractProject<?, ?>> {
+public class BuildNowTextProperty extends JobProperty<Job<?, ?>> {
     public final String alternateBuildNow;
 
     @DataBoundConstructor
@@ -35,7 +31,7 @@ public class BuildNowTextProperty extends JobProperty<AbstractProject<?, ?>> {
         }
 
         public boolean isApplicable(Class<? extends Job> jobType) {
-            return AbstractProject.class.isAssignableFrom(jobType);
+            return ParameterizedJobMixIn.ParameterizedJob.class.isAssignableFrom(jobType);
         }
 
         public String getDisplayName() {
