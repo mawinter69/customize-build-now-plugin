@@ -2,17 +2,15 @@ package org.jenkinsci.plugins.customizebuildnow;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import hudson.model.FreeStyleProject;
+import jenkins.model.Messages;
+import org.jenkinsci.plugins.workflow.job.WorkflowJob;
+import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.jvnet.hudson.test.JenkinsRule;
 
-import java.io.IOException;
-
-import static org.junit.Assert.*;
-
 /**
  * Test Build Now Label Change
- * Created by Udaypal Aarkoti (uaarkoti@gmail.com) on 12/19/14.
  */
 public class AlternateBuildNowTest {
     @Rule
@@ -21,7 +19,7 @@ public class AlternateBuildNowTest {
     @Test
     public void testBuildNowChange() throws Exception {
         FreeStyleProject p = rule.createFreeStyleProject();
-        p.addProperty(new BuildNowTextProperty(true, "Deploy Now"));
+        p.addProperty(new BuildNowTextProperty("Deploy Now"));
         //rule.interactiveBreak();
 
         JenkinsRule.WebClient wc = rule.createWebClient();
@@ -31,6 +29,7 @@ public class AlternateBuildNowTest {
         FreeStyleProject p2 = rule.configRoundtrip(p);
 
         BuildNowTextProperty textProperty = p2.getProperty(BuildNowTextProperty.class);
+        assertNotNull(textProperty);
         assertEquals(textProperty.getAlternateBuildNow(), "Deploy Now");
 
     }
@@ -38,11 +37,28 @@ public class AlternateBuildNowTest {
     @Test
     public void testBuildNowUnChanged() throws Exception {
         FreeStyleProject p = rule.createFreeStyleProject();
-        p.addProperty(new BuildNowTextProperty(false, "Deploy Now"));
         //rule.interactiveBreak();
 
         JenkinsRule.WebClient wc = rule.createWebClient();
         HtmlPage html = wc.getPage(p);
         assertNotNull(html.getAnchorByText("Build Now"));
+
+        FreeStyleProject p2 = rule.configRoundtrip(p);
+        BuildNowTextProperty textProperty = p2.getProperty(BuildNowTextProperty.class);
+        assertNull(textProperty);
     }
+
+    @Test
+    public void workflow() throws Exception {
+        WorkflowJob p = rule.jenkins.createProject(WorkflowJob.class, "p");
+        assertEquals(Messages.ParameterizedJobMixIn_build_now(), p.getBuildNowText());
+        p.addProperty(new BuildNowTextProperty("Deploy Now"));
+        assertEquals("Deploy Now", p.getBuildNowText());
+        JenkinsRule.WebClient wc = rule.createWebClient();
+        HtmlPage html = wc.getPage(p);
+        assertNotNull(html.getAnchorByText("Deploy Now"));
+        rule.configRoundtrip(p);
+        assertNotNull(p.getProperty(BuildNowTextProperty.class));
+   }
+
 }
