@@ -19,7 +19,7 @@ public class AlternateBuildNowTest {
     @Test
     public void testBuildNowChange() throws Exception {
         FreeStyleProject p = rule.createFreeStyleProject();
-        p.addProperty(new BuildNowTextProperty(true, "Deploy Now"));
+        p.addProperty(new BuildNowTextProperty("Deploy Now"));
         //rule.interactiveBreak();
 
         JenkinsRule.WebClient wc = rule.createWebClient();
@@ -29,6 +29,7 @@ public class AlternateBuildNowTest {
         FreeStyleProject p2 = rule.configRoundtrip(p);
 
         BuildNowTextProperty textProperty = p2.getProperty(BuildNowTextProperty.class);
+        assertNotNull(textProperty);
         assertEquals(textProperty.getAlternateBuildNow(), "Deploy Now");
 
     }
@@ -36,23 +37,28 @@ public class AlternateBuildNowTest {
     @Test
     public void testBuildNowUnChanged() throws Exception {
         FreeStyleProject p = rule.createFreeStyleProject();
-        p.addProperty(new BuildNowTextProperty(false, "Deploy Now"));
         //rule.interactiveBreak();
 
         JenkinsRule.WebClient wc = rule.createWebClient();
         HtmlPage html = wc.getPage(p);
         assertNotNull(html.getAnchorByText("Build Now"));
+
+        FreeStyleProject p2 = rule.configRoundtrip(p);
+        BuildNowTextProperty textProperty = p2.getProperty(BuildNowTextProperty.class);
+        assertNull(textProperty);
     }
 
     @Test
     public void workflow() throws Exception {
         WorkflowJob p = rule.jenkins.createProject(WorkflowJob.class, "p");
         assertEquals(Messages.ParameterizedJobMixIn_build_now(), p.getBuildNowText());
-        p.addProperty(new BuildNowTextProperty(true, "Deploy Now"));
+        p.addProperty(new BuildNowTextProperty("Deploy Now"));
         assertEquals("Deploy Now", p.getBuildNowText());
         JenkinsRule.WebClient wc = rule.createWebClient();
         HtmlPage html = wc.getPage(p);
         assertNotNull(html.getAnchorByText("Deploy Now"));
+        rule.configRoundtrip(p);
+        assertNotNull(p.getProperty(BuildNowTextProperty.class));
    }
 
 }
