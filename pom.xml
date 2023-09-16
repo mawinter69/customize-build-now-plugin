@@ -5,24 +5,29 @@
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.625</version> <!-- TODO 1.625.1 when released -->
+    <version>4.73</version>
     <relativePath />
   </parent>
 
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>customize-build-now</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <version>${changelist}</version>
   <packaging>hpi</packaging>
 
   <name>Customize Build Now Label</name>
   <description>Provide an alternate label to 'Build Now' to run a job</description>
-  <url>https://wiki.jenkins-ci.org/display/JENKINS/Customize+Build+Now+Plugin</url>
+  <url>https://github.com/jenkinsci/customize-build-now-plugin</url>
   <licenses>
     <license>
       <name>MIT License</name>
-      <url>http://opensource.org/licenses/MIT</url>
+      <url>https://opensource.org/licenses/MIT</url>
     </license>
   </licenses>
+
+  <properties>
+    <changelist>999999-SNAPSHOT</changelist>
+    <jenkins.version>2.423</jenkins.version>
+  </properties>
 
   <developers>
     <developer>
@@ -35,28 +40,39 @@
   <scm>
     <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
-    <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
+    <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
     <tag>HEAD</tag>
   </scm>
 
   <repositories>
     <repository>
       <id>repo.jenkins-ci.org</id>
-      <url>http://repo.jenkins-ci.org/public/</url>
+      <url>https://repo.jenkins-ci.org/public/</url>
     </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
       <id>repo.jenkins-ci.org</id>
-      <url>http://repo.jenkins-ci.org/public/</url>
+      <url>https://repo.jenkins-ci.org/public/</url>
     </pluginRepository>
   </pluginRepositories>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.jenkins.tools.bom</groupId>
+        <artifactId>bom-weekly</artifactId>
+        <version>2423.vce598171d115</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
-      <artifactId>workflow-aggregator</artifactId>
-      <version>1.10</version>
+      <artifactId>workflow-job</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
