@@ -26,7 +26,7 @@
 
   <properties>
     <changelist>999999-SNAPSHOT</changelist>
-    <jenkins.version>2.423</jenkins.version>
+    <jenkins.version>2.424-rc34187.a_28f2c8b_eef4</jenkins.version>
   </properties>
 
   <developers>
