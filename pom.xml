@@ -26,7 +26,7 @@
 
   <properties>
     <changelist>999999-SNAPSHOT</changelist>
-    <jenkins.version>2.423</jenkins.version>
+    <jenkins.version>2.414.1</jenkins.version>
   </properties>
 
   <developers>
@@ -61,8 +61,8 @@
     <dependencies>
       <dependency>
         <groupId>io.jenkins.tools.bom</groupId>
-        <artifactId>bom-weekly</artifactId>
-        <version>2423.vce598171d115</version>
+        <artifactId>bom-2.414.x</artifactId>
+        <version>2446.v2e9fd3b_d8c81</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
