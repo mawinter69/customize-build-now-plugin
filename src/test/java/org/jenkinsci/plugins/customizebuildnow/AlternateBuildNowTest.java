@@ -1,15 +1,16 @@
 package org.jenkinsci.plugins.customizebuildnow;
 
+import static org.junit.Assert.*;
+
 import hudson.model.ParameterDefinition;
 import hudson.model.ParametersDefinitionProperty;
 import hudson.model.StringParameterDefinition;
 import java.util.ArrayList;
 import java.util.List;
-import org.htmlunit.html.HtmlPage;
-import hudson.model.FreeStyleProject;
 import jenkins.model.Messages;
+import hudson.model.FreeStyleProject;
+import org.htmlunit.html.HtmlPage;
 import org.jenkinsci.plugins.workflow.job.WorkflowJob;
-import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.jvnet.hudson.test.JenkinsRule;
