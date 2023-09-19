@@ -6,6 +6,7 @@ import hudson.model.*;
 import jenkins.model.OptionalJobProperty;
 import jenkins.model.ParameterizedJobMixIn;
 import net.sf.json.JSONObject;
+import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.StaplerRequest;
@@ -48,6 +49,7 @@ public class BuildNowTextProperty extends OptionalJobProperty<Job<?, ?>> {
     }
 
     @Extension
+    @Symbol("customizeBuildNow")
     public static final class DescriptorImpl extends OptionalJobPropertyDescriptor {
 
 
