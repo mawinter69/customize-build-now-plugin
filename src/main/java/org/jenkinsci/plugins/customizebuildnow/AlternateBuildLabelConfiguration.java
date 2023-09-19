@@ -7,7 +7,7 @@ import jenkins.model.GlobalConfiguration;
 import jenkins.model.GlobalConfigurationCategory;
 import org.jenkinsci.Symbol;
 
-@Symbol("customBuildNow")
+@Symbol("customizeBuildNow")
 @Extension
 public class AlternateBuildLabelConfiguration extends GlobalConfiguration {
 
