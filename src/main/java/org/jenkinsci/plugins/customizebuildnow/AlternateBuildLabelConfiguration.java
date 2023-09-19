@@ -5,8 +5,9 @@ import hudson.Extension;
 import jenkins.appearance.AppearanceCategory;
 import jenkins.model.GlobalConfiguration;
 import jenkins.model.GlobalConfigurationCategory;
+import org.jenkinsci.Symbol;
 
-@org.jenkinsci.Symbol("customBuildNow")
+@Symbol("customBuildNow")
 @Extension
 public class AlternateBuildLabelConfiguration extends GlobalConfiguration {
 

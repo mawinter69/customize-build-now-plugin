@@ -3,7 +3,7 @@ Customize Build Now Plugin
 
 This plugin allows users to provide alternate labels to "Build Now", "Build with Parameters" and the "Build" button. 
 While it's well understood by Jenkins experts what "Build Now" means, sometimes its more intuitive for new Jenkins users to associate a 
-more appropriate label to suite the purpose of the job like "Deploy Now" or "Execute Now" or "Promote Now" etc...
+more appropriate label to suit the purpose of the job like "Deploy Now" or "Execute Now" or "Promote Now" etc...
 
 The labels can be configured globally in the `Appearance` section and/or individually for each job.
 
