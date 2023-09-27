@@ -1,8 +1,12 @@
 package org.jenkinsci.plugins.customizebuildnow;
 
 import hudson.Extension;
+import hudson.Util;
+import hudson.model.Descriptor;
 import hudson.model.Job;
+import hudson.model.ParametersDefinitionProperty;
 import hudson.util.AlternativeUiTextProvider;
+import jenkins.model.Jenkins;
 import jenkins.model.ParameterizedJobMixIn;
 
 /**
@@ -18,9 +22,38 @@ public class AlternateBuildNow extends AlternativeUiTextProvider {
         if (message == ParameterizedJobMixIn.BUILD_NOW_TEXT) {
             Job<?,?> p = (Job) t;
             BuildNowTextProperty bt = p.getProperty(BuildNowTextProperty.class);
+            String linkText = null;
             if (bt != null) {
-                return bt.getAlternateBuildNow();
+                linkText = Util.fixEmptyAndTrim(bt.getAlternateBuildNow());
             }
+            if (linkText == null) {
+                linkText = Util.fixEmptyAndTrim(AlternateBuildLabelConfiguration.get().getAlternateBuildNow());
+            }
+            return linkText;
+        }
+        if (message == ParameterizedJobMixIn.BUILD_WITH_PARAMETERS_TEXT) {
+            Job<?,?> p = (Job) t;
+            BuildNowTextProperty bt = p.getProperty(BuildNowTextProperty.class);
+            String linkText = null;
+            if (bt != null) {
+                linkText = Util.fixEmptyAndTrim(bt.getAlternateBuildWithParams());
+            }
+            if (linkText == null) {
+                linkText = Util.fixEmptyAndTrim(AlternateBuildLabelConfiguration.get().getAlternateBuildWithParams());
+            }
+            return linkText;
+        }
+        if (message == ParametersDefinitionProperty.BUILD_BUTTON_TEXT) {
+            Job<?,?> p = (Job) t;
+            BuildNowTextProperty bt = p.getProperty(BuildNowTextProperty.class);
+            String buttonText = null;
+            if (bt != null) {
+                buttonText = Util.fixEmptyAndTrim(bt.getAlternateBuildButton());
+            }
+            if (buttonText == null) {
+                buttonText =  Util.fixEmptyAndTrim(AlternateBuildLabelConfiguration.get().getAlternateBuildButton());
+            }
+            return buttonText;
         }
         return null;
     }
