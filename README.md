@@ -11,3 +11,14 @@ The labels can be configured globally in the `Appearance` section and/or individ
 ![Sidepanel](/docs/sidepanel.png)
 ![Sidepanel with Parameters](/docs/sidepanel-parameters.png)
 ![Parameters](/docs/parameters.png)
+
+
+### Configuration as Code
+```yaml
+appearance:
+  customizeBuildNow:
+    labels:
+      alternateBuildButton: "Execute"
+      alternateBuildNow: "Execute Now"
+      alternateBuildWithParams: "Execute with Parameters"  
+```

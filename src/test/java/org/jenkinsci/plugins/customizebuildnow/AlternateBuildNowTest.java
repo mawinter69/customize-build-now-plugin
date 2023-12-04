@@ -25,8 +25,9 @@ public class AlternateBuildNowTest {
     @Test
     public void testBuildNowChange() throws Exception {
         FreeStyleProject p = rule.createFreeStyleProject();
-        p.addProperty(new BuildNowTextProperty("Deploy Now"));
-        //rule.interactiveBreak();
+        Labels labels = new Labels();
+        labels.setAlternateBuildNow("Deploy Now");
+        p.addProperty(new BuildNowTextProperty(labels));
 
         JenkinsRule.WebClient wc = rule.createWebClient();
         HtmlPage html = wc.getPage(p);
@@ -36,7 +37,7 @@ public class AlternateBuildNowTest {
 
         BuildNowTextProperty textProperty = p2.getProperty(BuildNowTextProperty.class);
         assertNotNull(textProperty);
-        assertEquals(textProperty.getAlternateBuildNow(), "Deploy Now");
+        assertEquals(textProperty.getLabels().getAlternateBuildNow(), "Deploy Now");
     }
 
     @Test
@@ -45,11 +46,11 @@ public class AlternateBuildNowTest {
         List<ParameterDefinition> parameterDefinitions = new ArrayList<>();
         parameterDefinitions.add(new StringParameterDefinition("test", ""));
         ParametersDefinitionProperty paramsProp = new ParametersDefinitionProperty(parameterDefinitions);
-        BuildNowTextProperty prop = new BuildNowTextProperty("Run Now");
-        prop.setAlternateBuildWithParams("Run with Parameters");
-        p.addProperty(prop);
+        Labels labels = new Labels();
+        labels.setAlternateBuildNow("Run Now");
+        labels.setAlternateBuildWithParams("Run with Parameters");
+        p.addProperty(new BuildNowTextProperty(labels));
         p.addProperty(paramsProp);
-        //rule.interactiveBreak();
 
         JenkinsRule.WebClient wc = rule.createWebClient();
         HtmlPage html = wc.getPage(p);
@@ -59,13 +60,12 @@ public class AlternateBuildNowTest {
 
         BuildNowTextProperty textProperty = p2.getProperty(BuildNowTextProperty.class);
         assertNotNull(textProperty);
-        assertEquals(textProperty.getAlternateBuildWithParams(), "Run with Parameters");
+        assertEquals(textProperty.getLabels().getAlternateBuildWithParams(), "Run with Parameters");
     }
 
     @Test
     public void testBuildNowUnChanged() throws Exception {
         FreeStyleProject p = rule.createFreeStyleProject();
-        //rule.interactiveBreak();
 
         JenkinsRule.WebClient wc = rule.createWebClient();
         HtmlPage html = wc.getPage(p);
@@ -80,7 +80,9 @@ public class AlternateBuildNowTest {
     public void workflow() throws Exception {
         WorkflowJob p = rule.jenkins.createProject(WorkflowJob.class, "p");
         assertEquals(Messages.ParameterizedJobMixIn_build_now(), p.getBuildNowText());
-        p.addProperty(new BuildNowTextProperty("Deploy Now"));
+        Labels labels = new Labels();
+        labels.setAlternateBuildNow("Deploy Now");
+        p.addProperty(new BuildNowTextProperty(labels));
         assertEquals("Deploy Now", p.getBuildNowText());
         JenkinsRule.WebClient wc = rule.createWebClient();
         HtmlPage html = wc.getPage(p);
