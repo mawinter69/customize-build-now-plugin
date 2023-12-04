@@ -2,11 +2,9 @@ package org.jenkinsci.plugins.customizebuildnow;
 
 import hudson.Extension;
 import hudson.Util;
-import hudson.model.Descriptor;
 import hudson.model.Job;
 import hudson.model.ParametersDefinitionProperty;
 import hudson.util.AlternativeUiTextProvider;
-import jenkins.model.Jenkins;
 import jenkins.model.ParameterizedJobMixIn;
 
 /**
@@ -20,40 +18,37 @@ public class AlternateBuildNow extends AlternativeUiTextProvider {
     @Override
     public <T> String getText(Message<T> message, T t) {
         if (message == ParameterizedJobMixIn.BUILD_NOW_TEXT) {
-            Job<?,?> p = (Job) t;
+            Job<?,?> p = (Job<?, ?>) t;
             BuildNowTextProperty bt = p.getProperty(BuildNowTextProperty.class);
-            String linkText = null;
+            Labels labels = AlternateBuildLabelConfiguration.get().getLabels();
             if (bt != null) {
-                linkText = Util.fixEmptyAndTrim(bt.getAlternateBuildNow());
+                labels = bt.getLabels();
             }
-            if (linkText == null) {
-                linkText = Util.fixEmptyAndTrim(AlternateBuildLabelConfiguration.get().getAlternateBuildNow());
+            if (labels != null) {
+                return Util.fixEmptyAndTrim(labels.getAlternateBuildNow());
             }
-            return linkText;
         }
         if (message == ParameterizedJobMixIn.BUILD_WITH_PARAMETERS_TEXT) {
-            Job<?,?> p = (Job) t;
+            Job<?,?> p = (Job<?, ?>) t;
             BuildNowTextProperty bt = p.getProperty(BuildNowTextProperty.class);
-            String linkText = null;
+            Labels labels = AlternateBuildLabelConfiguration.get().getLabels();
             if (bt != null) {
-                linkText = Util.fixEmptyAndTrim(bt.getAlternateBuildWithParams());
+                labels = bt.getLabels();
             }
-            if (linkText == null) {
-                linkText = Util.fixEmptyAndTrim(AlternateBuildLabelConfiguration.get().getAlternateBuildWithParams());
+            if (labels != null) {
+                return Util.fixEmptyAndTrim(labels.getAlternateBuildWithParams());
             }
-            return linkText;
         }
         if (message == ParametersDefinitionProperty.BUILD_BUTTON_TEXT) {
-            Job<?,?> p = (Job) t;
+            Job<?,?> p = (Job<?, ?>) t;
             BuildNowTextProperty bt = p.getProperty(BuildNowTextProperty.class);
-            String buttonText = null;
+            Labels labels = AlternateBuildLabelConfiguration.get().getLabels();
             if (bt != null) {
-                buttonText = Util.fixEmptyAndTrim(bt.getAlternateBuildButton());
+                labels = bt.getLabels();
             }
-            if (buttonText == null) {
-                buttonText =  Util.fixEmptyAndTrim(AlternateBuildLabelConfiguration.get().getAlternateBuildButton());
+            if (labels != null) {
+                return Util.fixEmptyAndTrim(labels.getAlternateBuildButton());
             }
-            return buttonText;
         }
         return null;
     }

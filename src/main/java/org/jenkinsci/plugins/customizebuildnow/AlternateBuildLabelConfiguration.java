@@ -13,34 +13,35 @@ import org.kohsuke.stapler.StaplerRequest;
 @Extension
 public class AlternateBuildLabelConfiguration extends GlobalConfiguration {
 
+  private transient String alternateBuildNow;
+
+  private transient String alternateBuildWithParams;
+
+  private transient String alternateBuildButton;
+
+  private Labels labels;
+
   public AlternateBuildLabelConfiguration() {
     load();
   }
 
-  private String alternateBuildNow;
-
-  private String alternateBuildWithParams;
-
-  private String alternateBuildButton;
-
-  public String getAlternateBuildNow() {
-    return alternateBuildNow;
+  @Override
+  public void load() {
+    super.load();
+    if (labels == null) {
+      labels = new Labels();
+      labels.setAlternateBuildButton(alternateBuildButton);
+      labels.setAlternateBuildNow(alternateBuildNow);
+      labels.setAlternateBuildWithParams(alternateBuildWithParams);
+    }
   }
 
-  public void setAlternateBuildNow(String alternateBuildNow) {
-    this.alternateBuildNow = alternateBuildNow;
+  public Labels getLabels() {
+    return labels;
   }
 
-  public String getAlternateBuildWithParams() {
-    return alternateBuildWithParams;
-  }
-
-  public void setAlternateBuildWithParams(String alternateBuildWithParams) {
-    this.alternateBuildWithParams = alternateBuildWithParams;
-  }
-
-  public String getAlternateBuildButton() {
-    return alternateBuildButton;
+  public void setLabels(Labels labels) {
+    this.labels = labels;
   }
 
   public void setAlternateBuildButton(String alternateBuildButton) {
