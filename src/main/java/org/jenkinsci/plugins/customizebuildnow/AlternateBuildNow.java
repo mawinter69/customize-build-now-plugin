@@ -5,6 +5,7 @@ import hudson.Util;
 import hudson.model.Job;
 import hudson.model.ParametersDefinitionProperty;
 import hudson.util.AlternativeUiTextProvider;
+import hudson.widgets.HistoryWidget;
 import jenkins.model.ParameterizedJobMixIn;
 
 /**
@@ -48,6 +49,17 @@ public class AlternateBuildNow extends AlternativeUiTextProvider {
             }
             if (labels != null) {
                 return Util.fixEmptyAndTrim(labels.getAlternateBuildButton());
+            }
+        }
+        if (message == HistoryWidget.DISPLAY_NAME) {
+            Job<?, ?> p = (Job<?, ?>) ((HistoryWidget<?, ?>) t).owner;
+            BuildNowTextProperty bt = p.getProperty(BuildNowTextProperty.class);
+            Labels labels = AlternateBuildLabelConfiguration.get().getLabels();
+            if (bt != null) {
+                labels = bt.getLabels();
+            }
+            if (labels != null) {
+                return Util.fixEmptyAndTrim(labels.getAlternateBuildHistory());
             }
         }
         return null;

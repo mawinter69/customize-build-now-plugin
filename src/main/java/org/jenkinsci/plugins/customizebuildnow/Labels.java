@@ -15,8 +15,19 @@ public class Labels extends AbstractDescribableImpl<Labels> {
 
   private String alternateBuildButton;
 
+  private String alternateBuildHistory;
+
   @DataBoundConstructor
   public Labels() {
+  }
+
+  public String getAlternateBuildHistory() {
+    return alternateBuildHistory;
+  }
+
+  @DataBoundSetter
+  public void setAlternateBuildHistory(String alternateBuildHistory) {
+    this.alternateBuildHistory = alternateBuildHistory;
   }
 
   public String getAlternateBuildNow() {

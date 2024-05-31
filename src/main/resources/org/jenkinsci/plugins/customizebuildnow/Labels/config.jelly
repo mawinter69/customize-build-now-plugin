@@ -9,4 +9,7 @@
   <f:entry title="${%New Label for Build Button}" field="alternateBuildButton">
     <f:textbox/>
   </f:entry>
+  <f:entry title="${%New Label for Build History}" field="alternateBuildHistory">
+    <f:textbox/>
+  </f:entry>
 </j:jelly>

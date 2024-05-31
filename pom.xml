@@ -14,8 +14,8 @@
   <version>${changelist}</version>
   <packaging>hpi</packaging>
 
-  <name>Customize Build Now Label</name>
-  <description>Provide an alternate label to 'Build Now' to run a job</description>
+  <name>Customize Job Labels</name>
+  <description>Provide alternate labels for jobs</description>
   <url>https://github.com/jenkinsci/customize-build-now-plugin</url>
   <licenses>
     <license>
@@ -26,7 +26,7 @@
 
   <properties>
     <changelist>999999-SNAPSHOT</changelist>
-    <jenkins.version>2.426.1</jenkins.version>
+    <jenkins.version>2.435-SNAPSHOT</jenkins.version>
     <hpi.compatibleSinceVersion>17</hpi.compatibleSinceVersion>
   </properties>
 

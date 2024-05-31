@@ -1,6 +1,6 @@
 <?jelly escape-by-default='true'?>
 <div>
-  This plugin allows users to provide an alternate phrase to the "Build Now" and "Build with Parameters" links and the "Build" button
-  on the parameters page to build a job. Sometimes is more intuitive for users to call "Deploy now"
-  instead of "Build Now" to execute a job.
+  This plugin allows users to provide alternate phrases at various places of Jobs.
+  E.g. replace "Build Now" and "Build with Parameters" link.
+  Sometimes is more intuitive for users to call "Deploy now" instead of "Build Now" to execute a job.
 </div>
